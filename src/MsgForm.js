@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './images/LogoBlack.png'
 import './App.css';
 import './MsgForm.css'
 import axios from 'axios';
@@ -88,7 +87,7 @@ class MsgForm extends Component {
                     
                
         
-         return <select  onChange={this.handleTeamChange}><option value="" disabled="disabled" selected="selected">Vælg et hold</option> {result} </select>;
+         return <select  onChange={this.handleTeamChange}><option value="" disabled="disabled" selected="selected">Vælg modtager</option> {result} </select>;
         
             }
   render() {
@@ -99,17 +98,13 @@ class MsgForm extends Component {
     
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} alt="logo" />
-          <h1 className="App-title">Velkommen to LektApp</h1>
-        </header>
-       <h1>Send en ny besked</h1>
+      
         <form onSubmit={this.handleSubmit} className="formStyle">
         {resultList}
           <input type="text" placeholder="Titel.." onChange={this.handleTitleChange}/>
       
         <br/>
-        <input type="text" placeholder="Sender.." onChange={this.handleSenderChange} />
+        
         
        
    
