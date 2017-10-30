@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './NewTeam.css'
+import axios from 'axios';
+
 
 class NewTeam extends Component {
 
@@ -19,25 +21,28 @@ this.parseInput = this.parseInput.bind(this);
 
 
     handleSubmit(event) {
-        /*
+       
               event.preventDefault();
               
         
               // get our form data out of state
-              const formData = this.state.formData;
-              console.log('A msg was submitted. Title: ' + formData.title);
-              axios.post('http://localhost:5000/msg/new', formData)
+              const newTeam = this.parseInput(this.state.formData);
+            if(newTeam===null) {alert("ugyldigt input!")}
+            else{
+              console.log('A Team was submitted. Title: ' + newTeam);
+              axios.post('http://localhost:5000/team/new', {
+                newTeam:newTeam
+              })
                 .then((result,err) => {
-                    alert("Beskeden er blevet sendt!");
+                  //  alert("Beskeden er blevet sendt!");
         
                 },(err)=>{
                   alert("Fejl fra serveren. Beskeden er ikke sendt.")
                   console.log("ERROR :/")
                 });
            // console.log( event.target.submit())'
-        */
-
-console.log(this.parseInput(this.state.formData));        
+      
+          }
        
 
               }
@@ -59,6 +64,9 @@ console.log(this.parseInput(this.state.formData));
               }
 
               parseInput(formData){
+
+                if(formData.name && formData.teamList ){
+                  console.log("in if ")
                 var result = {teamName: formData.name, teamList:[{}]};   
                
                formData.teamList.split(",").map((student)=>{
@@ -66,12 +74,19 @@ console.log(this.parseInput(this.state.formData));
                
                var studentName =student.substring(student.indexOf("“")+1,student.indexOf("\"")); 
                var studentEmail =  student.substring(student.indexOf("<")+1,student.indexOf(">")).replace(/ /g,''); 
-               result.teamList.push({studentName: studentName, studentEmail: studentEmail});
+               result.teamList.push({name: studentName, mail: studentEmail});
                
                
                });
-               
                return result;
+              
+              
+              }   
+              
+              else {                 
+              console.log("in else ");
+              return null}
+               
                
                }
                
