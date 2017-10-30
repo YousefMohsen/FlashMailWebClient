@@ -43,3 +43,12 @@ input[type=text], select {
     margin: auto;
 
 }
+
+.App-header1{
+    padding: 10px;
+    margin: 20px;
+        text-align: center;
+        width: 100%;
+        height: 40px;
+    
+    }

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import './MsgForm.css'
 import axios from 'axios';
 import {observer} from "mobx-react";
 import  {mobx} from "mobx";
-import DataStore from './datastore';
+import DataStore from '../datastore';
 
 @observer
 class MsgForm extends Component {
@@ -97,8 +96,13 @@ class MsgForm extends Component {
     const resultList = this.renderTeamList(teamList);
     
     return (
-      <div className="App">
+      <div>
+      <div className="App-header1">
       
+      <h1>Ny besked</h1>
+  
+  </div>
+
         <form onSubmit={this.handleSubmit} className="formStyle">
         {resultList}
           <input type="text" placeholder="Titel.." onChange={this.handleTitleChange}/>
