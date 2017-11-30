@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './NewTeam.css'
 import axios from 'axios';
+import DataStore from '../../Data/DataStore'
 
 
 class NewTeam extends Component {
@@ -24,22 +25,22 @@ this.parseInput = this.parseInput.bind(this);
        
               event.preventDefault();
               
-        
               // get our form data out of state
-              const newTeam = this.parseInput(this.state.formData);
+              let newTeam = this.parseInput(this.state.formData);
+
+              
+              console.log(newTeam);
             if(newTeam===null) {alert("ugyldigt input!")}
             else{
-              console.log('A Team was submitted. Title: ' + newTeam);
-              axios.post('http://localhost:5000/team/new', {
-                newTeam:newTeam
+                
+
+              DataStore.creatNewTeam(newTeam)
+              .then(()=>alert("Holdet er oprettet!"))
+              .catch((er)=>{
+                console.log(er)
+                alert("Fejl fra serveren. Holdet er IKKE oprettet.")
               })
-                .then((result,err) => {
-                  //  alert("Beskeden er blevet sendt!");
-        
-                },(err)=>{
-                  alert("Fejl fra serveren. Beskeden er ikke sendt.")
-                  console.log("ERROR :/")
-                });
+
            // console.log( event.target.submit())'
       
           }
@@ -64,6 +65,7 @@ this.parseInput = this.parseInput.bind(this);
               }
 
               parseInput(formData){
+                console.log(formData.teamList)
 
                 if(formData.name && formData.teamList ){
                   console.log("in if ")
@@ -74,8 +76,8 @@ this.parseInput = this.parseInput.bind(this);
                
                var studentName =student.substring(student.indexOf("“")+1,student.indexOf("\"")); 
                var studentEmail =  student.substring(student.indexOf("<")+1,student.indexOf(">")).replace(/ /g,''); 
-               result.teamList.push({name: studentName, mail: studentEmail});
-               
+               result.teamList.push({name: studentName, mail: studentEmail, teams:[formData.name]});
+               console.log(result);
                
                });
                return result;

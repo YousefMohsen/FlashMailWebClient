@@ -3,7 +3,7 @@ import './MsgForm.css'
 import axios from 'axios';
 import {observer} from "mobx-react";
 import  {mobx} from "mobx";
-import DataStore from '../datastore';
+import DataStore from '../../Data/DataStore';
 
 @observer
 class MsgForm extends Component {
@@ -60,20 +60,13 @@ class MsgForm extends Component {
     handleSubmit(event) {
 
       event.preventDefault();
+      const formData = this.state.formData;
       
+DataStore.sendNewMessage(formData)
+
 
       // get our form data out of state
-      const formData = this.state.formData;
-      console.log('A msg was submitted. Title: ' + formData.title);
-      axios.post('http://localhost:5000/msg/new', formData)
-        .then((result,err) => {
-            alert("Beskeden er blevet sendt!");
 
-        },(err)=>{
-          alert("Fejl fra serveren. Beskeden er ikke sendt.")
-          console.log("ERROR :/")
-        });
-   // console.log( event.target.submit())
 
       }
 
