@@ -1,37 +1,23 @@
 
-import  {observable, computed, action} from "mobx";
 import axios from 'axios';
+import {connect} from "react-redux"
+import { INCREMENT, DECREMENT, RESET,UpdateTeamList } from "./redux/reducer"
+import store from './redux/store'
+import ActionFactory from './redux/actions'
 
 
 const api = 'http://localhost:4000';
 class DataStore {
-
-    @observable Teams = [];
     
 
 
-    constructor() {
-     //  this.testMethod();
-        //this.getFlightByDestination("CPH");
-
-        this.fetchTeamList();
-
-    }
-
-    @action
-    setTeams(newTeamList){
-        this.Teams = newTeamList;
-        console.log(this.Teams);
-        
-
-    }
     fetchTeamList(){
         var st = this.setTeams;
                 axios.get(api+'/team/all')
                 .then( (response)=> {
-                    //console.log(response.data);
-                    
-                    this.setTeams(response.data);
+
+                    store.dispatch(ActionFactory.updateTeamList(response.data))
+
                 })
                 .catch(function (error) {
                   console.log(error);
@@ -72,9 +58,15 @@ getTeamInfo= async(teamName)=>{
    
     return axios.get(api+'/team/'+teamName)
     .then( (response)=> {
-        //console.log(response.data);
+
+       let team = response.data;
+      store.dispatch(ActionFactory.getTeamInfo(team))
+      store.dispatch(ActionFactory.selectStudent(team.students[0]))
         
-        return response.data})
+        return response.data
+    
+    
+    })
     .catch(function (error) {
       console.log(error);
     });
@@ -87,7 +79,10 @@ deleteStudentByID(studentID){
     console.log(url);
 return axios.delete(url)
 .then((response)=>{
-console.log("from axios",response);
+    let selectedTeam = store.getState().selectedTeam.name;
+   this.getTeamInfo(selectedTeam);//update state
+    
+console.log("from axios",store.getState());
 
 })
 .catch((er)=>console.log(er))
@@ -97,14 +92,22 @@ console.log("from axios",response);
 
 
 
+
 }
 
-export default new DataStore();
-
+const mapDispatchToProps = dispatch => {
+    return {
+      increment: ()=> dispatch({type: INCREMENT,val: 5}),
+      decrement: ()=> dispatch({type: DECREMENT,val: 5 }),
+      reset: ()=> dispatch({ type: RESET }),
+      updateTeamList: (val)=> dispatch({ type: UpdateTeamList, val:val }),
       
+    }
+  }
+export default new DataStore()
 
 
-
+//  
 
 
 

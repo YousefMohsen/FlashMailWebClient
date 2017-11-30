@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './NewTeam.css'
-import axios from 'axios';
 import DataStore from '../../Data/DataStore'
+import {connect} from "react-redux"
+import { SelectStudent ,UpdateTeamList } from "../../Data/redux/reducer"
 
 
 class NewTeam extends Component {
@@ -34,8 +35,10 @@ this.parseInput = this.parseInput.bind(this);
             else{
                 
 
-              DataStore.creatNewTeam(newTeam)
-              .then(()=>alert("Holdet er oprettet!"))
+              DataStore.createNewTeam(newTeam)
+              .then(()=>{alert("Holdet er oprettet!")
+              DataStore.fetchTeamList();
+            })
               .catch((er)=>{
                 console.log(er)
                 alert("Fejl fra serveren. Holdet er IKKE oprettet.")
@@ -130,5 +133,11 @@ this.parseInput = this.parseInput.bind(this);
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
 
-export default NewTeam;
+    updateTeamList: (val)=> dispatch({ type: UpdateTeamList, val:val }),
+    
+  }
+}
+export default connect(mapDispatchToProps)(NewTeam)

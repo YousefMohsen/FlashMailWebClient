@@ -6,11 +6,9 @@ import { observer } from "mobx-react";
 import Header from './SmallComp/Header'
 
 
-
-
-
 const App = observer(class App extends Component {
   render() {
+    console.log(this.props.test)
     return (
       <div>
 

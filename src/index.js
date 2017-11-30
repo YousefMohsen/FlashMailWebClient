@@ -7,10 +7,13 @@ import MsgForm from './NavigationPages/NewMessage/MsgForm';
 import NewTeam from './NavigationPages/NewTeam/NewTeam';
 import EditTeam from './NavigationPages/EditTeam/EditTeam';
 import { hashHistory, Router, Route, IndexRoute } from 'react-router'
+import { Provider } from 'react-redux';
+import store from './Data/redux/store'
+import ActionFactory from './Data/redux/actions'
 
 ReactDOM.render((
     
-    
+    <Provider store={store} actionsFactory={ActionFactory}>
     
     <Router history={hashHistory}>
     
@@ -25,7 +28,7 @@ ReactDOM.render((
     </Router>
 
 
-
+</Provider>
 
 
 

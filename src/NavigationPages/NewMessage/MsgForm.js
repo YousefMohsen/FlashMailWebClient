@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './MsgForm.css'
 import axios from 'axios';
-import {observer} from "mobx-react";
-import  {mobx} from "mobx";
 import DataStore from '../../Data/DataStore';
+import {connect} from "react-redux"
+import { INCREMENT, DECREMENT, RESET,UpdateTeamList } from "../../Data/redux/reducer"
 
-@observer
+
 class MsgForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {formData:{}};
-
+console.log(this.props)
 
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSenderChange = this.handleSenderChange.bind(this);
@@ -27,6 +27,11 @@ class MsgForm extends Component {
         
         
         
+      }
+
+
+      componentDidMount(){
+DataStore.fetchTeamList();
       }
 
 
@@ -59,41 +64,49 @@ class MsgForm extends Component {
           }
     handleSubmit(event) {
 
+      
       event.preventDefault();
       const formData = this.state.formData;
       
 DataStore.sendNewMessage(formData)
-
 
       // get our form data out of state
 
 
       }
 
-      renderTeamList(nTeamList){
-        
-        console.log(nTeamList);
-        
-                var result = nTeamList.map((team) => {
+      renderTeamList(){
+        let optionsToRender = null;
+        let teamList = this.props.teamList;
+      if(teamList){
+console.log("In RENDER TEAN",teamList);
+        //if(!this.state.selectedTeam){ DataStore.getTeamInfo(nTeamList[0]).then((selectedTeam)=>this.setState({selectedTeam: selectedTeam}));}
+        optionsToRender = teamList.map((team,index) => {
              return <option value={team}>{team}</option> });
                     
-               
-        
-         return <select  onChange={this.handleTeamChange}><option value="" disabled="disabled" selected="selected">Vælg modtager</option> {result} </select>;
+        }else{
+          <option value="">nope</option>
+
+        }
+
+
+
+
+
+        return <select  onChange={this.handleTeamChange}> {optionsToRender} </select>;
         
             }
+
   render() {
 
-    const teamList = DataStore.Teams;
-    console.log(teamList.slice());
+    const teamList = this.props.teamList//DataStore.Teams;
     const resultList = this.renderTeamList(teamList);
     
     return (
       <div>
       <div className="App-header1">
       
-      <h1>Ny besked</h1>
-  
+      <h1>Ny besked {this.props.count}</h1>
   </div>
 
         <form onSubmit={this.handleSubmit} className="formStyle">
@@ -119,5 +132,16 @@ DataStore.sendNewMessage(formData)
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    teamList: state.teamList
+  };
+}
+const mapDispatchToProps = dispatch => {
+  return {
 
-export default MsgForm;
+    updateTeamList: (val)=> dispatch({ type: UpdateTeamList, val:val }),
+    
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(MsgForm)

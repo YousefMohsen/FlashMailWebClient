@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './EditTeam.css'
-import {observer} from "mobx-react";
-import  {mobx} from "mobx";
 import DataStore from '../../Data/DataStore'
+import {connect} from "react-redux"
+import { SelectStudent ,UpdateTeamList } from "../../Data/redux/reducer"
 
-@observer
+const photoPlaveholder = "https://image.flaticon.com/icons/svg/149/149071.svg";
+
 class EditTeam extends Component {
 
     constructor(props) {
@@ -15,50 +16,51 @@ this.selectStudent = this.selectStudent.bind(this)
 this.renderTeaminfo = this.renderTeaminfo.bind(this);
 this.renderStudenList = this.renderStudenList.bind(this)
 this.renderTeaminfo = this.renderTeaminfo.bind(this)
-      }
+console.log(props);     
+}
 
+      componentDidMount(){
+        DataStore.fetchTeamList();
+        
+              }
 
  
           handleTeamChange= async(event)=>{
 
-            let selectedTeam = await DataStore.getTeamInfo(event.target.value);
+            DataStore.getTeamInfo(event.target.value);
             
 
-            this.setState({selectedTeam: selectedTeam});
-
           }
-    handleSubmit(event) {
-
-      event.preventDefault();
-      const formData = this.state.formData;
-      
-DataStore.sendNewMessage(formData)
 
 
-      // get our form data out of state
-
-
-      }
-      newSelect(){
-        console.log("newSelet")
-
-      }
-      renderTeamList(nTeamList){
-
-        if(!this.state.selectedTeam){ DataStore.getTeamInfo(nTeamList[0]).then((selectedTeam)=>this.setState({selectedTeam: selectedTeam}));}
-
-                var result = nTeamList.map((team,index) => {
+      renderTeamList(){
+        let optionsToRender = null;
+        let teamList = this.props.teamList;
+      if(teamList){
+console.log("In RENDER TEAN",teamList);
+        //if(!this.state.selectedTeam){ DataStore.getTeamInfo(nTeamList[0]).then((selectedTeam)=>this.setState({selectedTeam: selectedTeam}));}
+        optionsToRender = teamList.map((team,index) => {
              return <option value={team}>{team}</option> });
                     
-         return <select  onChange={this.handleTeamChange}> {result} </select>;
+        }else{
+          <option value="">nope</option>
+
+        }
+
+
+
+
+
+        return <select  onChange={this.handleTeamChange}> {optionsToRender} </select>;
         
             }
 
 
 
          renderTeaminfo(){
-          if(this.state.selectedTeam){
-            let team = this.state.selectedTeam;
+          let team = this.props.selectedTeam;
+          console.log("SELECTED TEAM", team);
+          if(team){
             
             return(
               <div className="container-fluid">
@@ -113,9 +115,10 @@ DataStore.sendNewMessage(formData)
          }
 
          renderStudentInfo(){
-           let photoPlaveholder = "https://image.flaticon.com/icons/svg/149/149071.svg";
-          if(this.state.selectedStudent){
-            let student = this.state.selectedStudent;
+          let student = this.props.selectedStudent;
+          console.log("SELECTEDSTUDENT", student)
+          
+          if(student){
             return(
               
               <div class="studentInfoContainer">
@@ -133,6 +136,7 @@ DataStore.sendNewMessage(formData)
             )
           }
           else{
+            console.log("ELSE")
             return(<h1>vælg en studerende</h1>)
             
           }
@@ -141,30 +145,30 @@ DataStore.sendNewMessage(formData)
 
          deleteStudent(student){
          DataStore.deleteStudentByID(student._id);
+         
          }
          selectStudent(student){
         
-          this.setState({selectedStudent: student});
             //e.target.className = 'active';
-
+            this.props.selectStudent(student)
           console.log("btn clicked",student)
          //  this.state ={data: 'sds'};
         }
   render() {
+    const test = this.props.count? "true" : "True";
 
-    const teamList = DataStore.Teams;
-    console.log(teamList.slice());
-    const resultList = this.renderTeamList(teamList);
+    const teamSelector = this.renderTeamList();
     const teamInfo = this.renderTeaminfo();
+    
     return (
       <div>
       <div className="App-header1">
       
-      <h1>Rediger hold</h1>
+      <h1>Rediger hold {test}</h1>
   
   </div>
 
-        {resultList}
+        {teamSelector}
 
 <div>
 
@@ -181,4 +185,19 @@ DataStore.sendNewMessage(formData)
   }
 }
 
-export default EditTeam;
+function mapStateToProps(state) {
+  return {
+    teamList: state.teamList,
+    selectedTeam: state.selectedTeam,
+    selectedStudent: state.selectedStudent
+  };
+}
+const mapDispatchToProps = dispatch => {
+  return {
+
+    updateTeamList: (val)=> dispatch({ type: UpdateTeamList, val:val }),
+    selectStudent: (val)=> dispatch({ type: SelectStudent, val:val }),
+    
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(EditTeam)
