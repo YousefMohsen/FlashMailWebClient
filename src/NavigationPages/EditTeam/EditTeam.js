@@ -113,14 +113,20 @@ DataStore.sendNewMessage(formData)
          }
 
          renderStudentInfo(){
+           let photoPlaveholder = "https://image.flaticon.com/icons/svg/149/149071.svg";
           if(this.state.selectedStudent){
             let student = this.state.selectedStudent;
             return(
               
-              <div class="studentInfo">
+              <div class="studentInfoContainer">
+<div className="studentInfo">
               <h1>Studerende:</h1>
+
               <h4 class="title">Navn: {student.name}</h4>
               <h4>Mail: {student.mail}</h4>
+              <h4>Har mobilapp: {student.pushToken? "Ja":"Nej"}</h4>
+</div>
+              <img src={student.imgUrl? student.imgUrl:photoPlaveholder} class="studenPhoto" alt="StudentPhoto"/>
              
              <button onClick={this.deleteStudent.bind(this,student)} className="btn btn-danger">Slet</button> {/* TODO: */}
             </div>
@@ -134,7 +140,7 @@ DataStore.sendNewMessage(formData)
          }
 
          deleteStudent(student){
-          alert(student.name)
+         DataStore.deleteStudentByID(student._id);
          }
          selectStudent(student){
         

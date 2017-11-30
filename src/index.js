@@ -16,7 +16,7 @@ ReactDOM.render((
     
     
     <Route path='/' component={App}>
-    <IndexRoute component={EditTeam}/> 
+    <IndexRoute component={MsgForm}/> 
     
     <Route path='/newTeam' component={NewTeam}/>
     <Route path='/editTeam' component={EditTeam}/>

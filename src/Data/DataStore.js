@@ -82,6 +82,18 @@ getTeamInfo= async(teamName)=>{
 
 }
 
+deleteStudentByID(studentID){
+    let url = api+'/student/delete/'+studentID;
+    console.log(url);
+return axios.delete(url)
+.then((response)=>{
+console.log("from axios",response);
+
+})
+.catch((er)=>console.log(er))
+
+}
+
 
 
 

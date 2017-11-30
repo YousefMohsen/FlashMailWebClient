@@ -1,9 +1,22 @@
-.studentInfo{
+.studentInfoContainer{
     width:100%;
-    height:100%;
     text-align: left;
+    background-color:white;
+    padding: 1%;
 }
+.studenPhoto{
 
+width: 30%;
+display: inline-block;
+margin: 0;    
+float: right;
+align-self: center;
+}
+.studentInfo{
+    display: inline-block;
+    margin: 0;    
+    
+}
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -13,13 +26,13 @@
 margin: 0;    
 }
 
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.studentInfoContainer:hover {
+    box-shadow: 3 8px 16px 0 rgba(0, 0, 0, 0.459);
 }
 
 
 
 .btn{
 
-    width: 50%
+    width: 100%
 }
