@@ -64,9 +64,11 @@ if(formData.team&&formData.msg&&formData.title){
       
 DataStore.sendNewMessage(formData)
 .then(()=>{
+  this.setState({formData:{team: formData.team, msg: "", title: "" }})
   
+console.log(this.state.formData)
+  this.render();
 })
-this.setState({formData:{}})
 
 
     }
@@ -94,28 +96,27 @@ console.log("In RENDER TEAN",teamList);
 
 
 
-        return <select  onChange={this.handleTeamChange}><option >Choose a team</option> {optionsToRender} </select>;
+        return <select className="teamList"  onChange={this.handleTeamChange}><option >Choose a team</option> {optionsToRender} </select>;
         
             }
 
   render() {
 
     const teamList = this.props.teamList//DataStore.Teams;
-    const resultList = this.renderTeamList(teamList);
+    const teamSelector = this.renderTeamList(teamList);
     
     return (
       <div>
-      <div className="App-header1">
+      <div className="header">
       
-      <h1>Ny besked {this.props.count}</h1>
+      <h1>Ny besked</h1>
   </div>
-
 
 
 
   
         <form onSubmit={this.handleSubmit} className="formStyle">
-        {resultList}
+        {teamSelector}
           <input type="text" placeholder="Titel.." value={this.state.formData.title} onChange={this.handleTitleChange}/>
       
         <br/>
@@ -129,11 +130,10 @@ console.log("In RENDER TEAN",teamList);
     
       <br/>
 
-        <input type="submit" value="Send" />
+        <input className="submitBtn" type="submit" value="Send besked" />
       </form>
-        
-
       </div>
+
     );
   }
 }

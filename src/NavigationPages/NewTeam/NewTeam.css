@@ -9,24 +9,26 @@ margin: 20px;
 }
 
 .formStyle{
-    border-radius: 5px;
     padding: 20px;
-    width: 50%;
+    width: 100%;
     margin: auto;
 
 }
 .exampleText{
 
-    border-radius: 5px;
-    padding: 20px;
-    width: 50%;
+    width: 100%;
     margin: auto;
-    border: 1px dotted darkslategrey
+    padding-left: 5px;
+    border-left: 1px dotted darkslategrey
 
 }
 
 .exampleText h1{
-    font-size: 2em
+    font-size: 2em;
+    font-weight:bold;
+    padding: 4px;
+    text-align: center;
+    
 }
 .exampleText p{
     border: 1px dotted darkslategrey;
@@ -35,4 +37,15 @@ color: darkslategrey;
 padding: 5px;
 text-align: center;
 };
+.exampleText textarea{
+    
+    text-align: center;
+}
+
+
+.col1{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
 

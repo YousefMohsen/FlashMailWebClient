@@ -1,22 +1,17 @@
 
 .msgBoxContainer{
     width:100%;
-    text-align: left;
-    background-color:white;
 }
 
 
 
 .messageCard{
 background-color: white;
-
-
-
-
-
+margin: auto;
+padding-top: 10px;
 }
 
-.messageCard h1{
+.messageCard h4, p {
     padding-bottom: 10px;
     border-bottom: 1px solid gray;
     
@@ -28,3 +23,14 @@ background-color: white;
 color: white
 }
 
+.selected{
+background-color: #FBB040;
+color: white;
+}
+.msgListTitle{
+background-color: #EFEDEA ;
+color: #222222;
+        
+
+
+}

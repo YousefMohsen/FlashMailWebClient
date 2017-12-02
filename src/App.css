@@ -30,3 +30,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.header{
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px solid #FBB040;
+  width: 95%;
+  margin: auto;
+}
+
+.teamList{
+  width: 50%;
+}
+

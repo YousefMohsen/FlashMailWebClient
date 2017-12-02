@@ -59,7 +59,7 @@ console.log(props);
           if(team){
             
             return(
-              <div className="container-fluid">
+              <div className="container-fluid  msgBoxContainer">
               <br />
               <div className="row">
               <div className="col-sm-6 messageList">
@@ -89,7 +89,6 @@ console.log(props);
 renderMsgList(msgList){
 
   
-           console.log("STUDENTS",msgList);
            if(!msgList)return <h1>No messages</h1>
           
           else{
@@ -97,10 +96,10 @@ renderMsgList(msgList){
             return(
             <div className="studentList">
             <ul className="list-group">
-            <li className="list-group-item" style={{backgroundColor: 'grey', color: 'white'}} >Title</li>
             {msgList.map((msg)=>{
+            let isSelected = this.props.selectedMessage === msg;
 
-              return <li className="list-group-item" onClick={this.selectMsg.bind(this, msg)}>{msg.title}</li>;
+              return <li className={isSelected? "list-group-item selected":"list-group-item"} onClick={()=>this.selectMsg(msg)} msg="heej" >{msg.title}</li>;
 
             })}
 
@@ -112,14 +111,12 @@ renderMsgList(msgList){
 
          renderMsgText(){
           let message = this.props.selectedMessage
-          console.log("SELECTEDMSG", message)
           
           if(message){
             console.log(message.dateSent)
             
             return(
               
-            <div class="msgBoxContainer">
               <div className="messageCard">
 
               <h4><strong>Titel: </strong>{message.title}</h4>
@@ -128,7 +125,6 @@ renderMsgList(msgList){
               <p><strong>Afsender:</strong> {message.sender.name}</p>
               <p><strong>Sendt:</strong> {message.dateSent.slice(0,10)+ " "+ message.dateSent.slice(11,16)}</p>
               
-              </div>
              
             </div>
             )
@@ -140,10 +136,9 @@ renderMsgList(msgList){
          }
 
          selectMsg(msg){
-            //e.target.className = 'active'; //TODO: mark as active
+
             this.props.selectMsg(msg)
-          console.log("btn clicked",msg)
-         //  this.state ={data: 'sds'};
+
         }
   render() {
     const teamSelector = this.renderTeamList();
@@ -153,12 +148,12 @@ renderMsgList(msgList){
       <div>
       <div className="header">
       
-      <h1 className>Sendte beskeder </h1>
+      <h1>Sendte beskeder </h1>
   
   </div>
-
+<div>
         {teamSelector}
-
+        </div>
 <div>
 
 <div>

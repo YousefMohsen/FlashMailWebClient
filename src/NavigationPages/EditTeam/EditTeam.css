@@ -1,16 +1,17 @@
 .studentInfoContainer{
     width:100%;
-    text-align: left;
     background-color:white;
-    padding: 1%;
 }
 .studenPhoto{
 
 width: 30%;
 display: inline-block;
 margin: 0;    
-float: right;
+float: left;
 align-self: center;
+margin-right: 5px;
+padding-right: 5px;
+border-right: 1px solid grey;
 }
 .studentInfo{
     display: inline-block;
@@ -37,9 +38,6 @@ margin: 0;
     width: 100%
 }
 
-.header{
-    margin-bottom: 20px;
-    text-align: center;
-    
+.list-group{
+    float: left
 }
-

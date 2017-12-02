@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './NewTeam.css'
 import DataStore from '../../Data/DataStore'
 import {connect} from "react-redux"
-import { SelectStudent ,UpdateTeamList } from "../../Data/redux/reducer"
+import { UpdateTeamList } from "../../Data/redux/reducer"
 
 class NewTeam extends Component {
 
@@ -94,18 +94,16 @@ this.renderFormatExample  = this.renderFormatExample.bind(this);
                
                }
                
-               
+      
                
                
                renderFormatExample(){
 
                   return(
                       <div className="exampleText">
-
-
-                    <h1>Brug følgende format for at oprette et ny hold</h1>
+                    <h1>Brug følgende format </h1>
                     <p> <strong>{textFormat}</strong></p>
-                    <h6>Eksempel:</h6>
+                    <h6><strong>Eksempel:</strong></h6>
                     <textarea type="text" disabled={true} value={exampleText} />
                     </div>
                   )
@@ -117,14 +115,16 @@ this.renderFormatExample  = this.renderFormatExample.bind(this);
     
     return (
       <div>
-      
-      <div className="App-header1">
+          <div className="header">
       
       <h1>Opret et nyt hold</h1>
   
   </div>
+  
 
 
+  <div className="twoColmContainer">
+  <div className="col1">
       <form onSubmit={this.handleSubmit} className="formStyle">
    
         <input type="text" placeholder="Navn.." onChange={this.handleNameChange}/>
@@ -132,10 +132,14 @@ this.renderFormatExample  = this.renderFormatExample.bind(this);
     <textarea type="text" placeholder="Indsæt en holdliste.." 
     onChange={this.handleTeamChange}/>
     <br/>
-      <input type="submit" value="Opret" />
+      <input className="submitBtn" type="submit" value="Opret" />
     </form>
-
-{formatExample}
+    </div>
+    <div className="col1">
+    {formatExample}
+    
+    </div>
+</div>
 
       </div>
     );

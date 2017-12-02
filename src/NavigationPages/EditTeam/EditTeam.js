@@ -49,7 +49,7 @@ console.log(props);
 
 
 
-        return <select  onChange={this.handleTeamChange}> {optionsToRender} </select>;
+        return <select className="teamList" onChange={this.handleTeamChange}> {optionsToRender} </select>;
         
             }
 
@@ -57,7 +57,6 @@ console.log(props);
 
          renderTeaminfo(){
           let team = this.props.selectedTeam;
-          console.log("SELECTED TEAM", team);
           if(team){
             
             return(
@@ -90,9 +89,7 @@ console.log(props);
 
          renderStudenList(studentList){
 
-          
-           console.log("STUDENTS",studentList);
-           if(!studentList)return <h1>test</h1>
+       if(!studentList)return <h1>ingen studerende fundet</h1>
           
           else{
             
@@ -101,8 +98,9 @@ console.log(props);
             <ul className="list-group">
             
             {studentList.map((student)=>{
+             let isSelected = this.props.selectedStudent === student; 
 
-              return <li className="list-group-item" onClick={this.selectStudent.bind(this, student)}>{student.name}</li>;
+              return <li  className={isSelected? "list-group-item selected":"list-group-item"} onClick={this.selectStudent.bind(this, student)}>{student.name}</li>;
 
             })}
 
@@ -158,22 +156,21 @@ console.log(props);
       <div>
       <div className="header">
       
-      <h1 className>Rediger hold </h1>
+      <h1 >Rediger hold </h1>
 
   </div>
 
-        {teamSelector}
-
-<div>
+  <div className="editTeamContainer">
+  {teamSelector}
+  
 
 <div>
 {teamInfo}
 </div>
 
 </div>
+</div>
 
-
-      </div>
     );
   }
 }
