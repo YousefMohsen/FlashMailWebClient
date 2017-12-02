@@ -7,3 +7,32 @@ margin: 20px;
     height: 40px;
 
 }
+
+.formStyle{
+    border-radius: 5px;
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+
+}
+.exampleText{
+
+    border-radius: 5px;
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+    border: 1px dotted darkslategrey
+
+}
+
+.exampleText h1{
+    font-size: 2em
+}
+.exampleText p{
+    border: 1px dotted darkslategrey;
+    
+color: darkslategrey;
+padding: 5px;
+text-align: center;
+};
+

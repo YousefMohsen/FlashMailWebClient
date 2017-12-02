@@ -37,8 +37,6 @@ console.log(props);
         let optionsToRender = null;
         let teamList = this.props.teamList;
       if(teamList){
-console.log("In RENDER TEAN",teamList);
-        //if(!this.state.selectedTeam){ DataStore.getTeamInfo(nTeamList[0]).then((selectedTeam)=>this.setState({selectedTeam: selectedTeam}));}
         optionsToRender = teamList.map((team,index) => {
              return <option value={team}>{team}</option> });
                     
@@ -123,8 +121,6 @@ console.log("In RENDER TEAN",teamList);
               
               <div class="studentInfoContainer">
 <div className="studentInfo">
-              <h1>Studerende:</h1>
-
               <h4 class="title">Navn: {student.name}</h4>
               <h4>Mail: {student.mail}</h4>
               <h4>Har mobilapp: {student.pushToken? "Ja":"Nej"}</h4>
@@ -137,7 +133,7 @@ console.log("In RENDER TEAN",teamList);
           }
           else{
             console.log("ELSE")
-            return(<h1>vælg en studerende</h1>)
+            return(<h1>Holdet har ingen studerende</h1>)
             
           }
 
@@ -163,7 +159,7 @@ console.log("In RENDER TEAN",teamList);
       <div className="header">
       
       <h1 className>Rediger hold </h1>
-  
+
   </div>
 
         {teamSelector}
@@ -175,7 +171,6 @@ console.log("In RENDER TEAN",teamList);
 </div>
 
 </div>
-
 
 
       </div>

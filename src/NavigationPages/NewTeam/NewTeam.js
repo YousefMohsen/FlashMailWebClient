@@ -4,7 +4,6 @@ import DataStore from '../../Data/DataStore'
 import {connect} from "react-redux"
 import { SelectStudent ,UpdateTeamList } from "../../Data/redux/reducer"
 
-
 class NewTeam extends Component {
 
 constructor(props){
@@ -17,7 +16,7 @@ this.handleNameChange = this.handleNameChange.bind(this);
 this.handleTeamChange = this.handleTeamChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
 this.parseInput = this.parseInput.bind(this);
-
+this.renderFormatExample  = this.renderFormatExample.bind(this);
 
 }
 
@@ -98,9 +97,23 @@ this.parseInput = this.parseInput.bind(this);
                
                
                
+               renderFormatExample(){
 
+                  return(
+                      <div className="exampleText">
+
+
+                    <h1>Brug følgende format for at oprette et ny hold</h1>
+                    <p> <strong>{textFormat}</strong></p>
+                    <h6>Eksempel:</h6>
+                    <textarea type="text" disabled={true} value={exampleText} />
+                    </div>
+                  )
+
+               }   
   render() {
 
+    let formatExample = this.renderFormatExample();
     
     return (
       <div>
@@ -115,19 +128,14 @@ this.parseInput = this.parseInput.bind(this);
       <form onSubmit={this.handleSubmit} className="formStyle">
    
         <input type="text" placeholder="Navn.." onChange={this.handleNameChange}/>
-    
-      
-      
-     
- 
     <br/>
     <textarea type="text" placeholder="Indsæt en holdliste.." 
     onChange={this.handleTeamChange}/>
-  
     <br/>
-
       <input type="submit" value="Opret" />
     </form>
+
+{formatExample}
 
       </div>
     );
@@ -141,3 +149,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 export default connect(mapDispatchToProps)(NewTeam)
+
+
+const exampleText  = '“Søren Kirkegaard" < søren@cphbusiness.dk >, \n “Jørgen Læssøe" < jørgen@cphbusiness.dk >,\n “Jostein Gaarder" < “jostein@cphbusiness.dk >,\n “Fernando Savater" < fernando@cphbusiness.dk >,'
+const textFormat = ' “Elevens fulde navn" < elevens email >,';
