@@ -1,7 +1,5 @@
 
 import axios from 'axios';
-import {connect} from "react-redux"
-import { INCREMENT, DECREMENT, RESET,UpdateTeamList } from "./redux/reducer"
 import store from './redux/store'
 import ActionFactory from './redux/actions'
 
@@ -12,11 +10,12 @@ class DataStore {
 
 
     fetchTeamList(){
-        var st = this.setTeams;
                 axios.get(api+'/team/all')
                 .then( (response)=> {
-
-                    store.dispatch(ActionFactory.updateTeamList(response.data))
+                        let teamList = response.data;
+                    store.dispatch(ActionFactory.updateTeamList(teamList))
+                    this.getTeamInfo(teamList[0])
+                    this.getMsgTeamInfo(teamList[0])
 
                 })
                 .catch(function (error) {
@@ -29,8 +28,9 @@ class DataStore {
 
               
 sendNewMessage(formData){
+console.log("FORMDATA FROM DATASTORE",formData)
 
-      axios.post(api+'/msg/new', formData)
+      return axios.post(api+'/msg/new', formData)
       .then((result,err) => {
           alert("Beskeden er blevet sendt!");
 
@@ -74,8 +74,32 @@ getTeamInfo= async(teamName)=>{
 
 }
 
+
+
+getMsgTeamInfo = async(teamName)=>{
+  
+  
+    axios.get(api+'/team/'+teamName)
+   .then( (response)=> {
+
+      let team = response.data;
+      console.log("FROM AXIOS ", team)
+     store.dispatch(ActionFactory.selectMsgTeam(team))
+       
+    //   return response.data
+   
+   
+   })
+   .catch(function (error) {
+     console.log(error);
+   });
+
+
+}
+
 deleteStudentByID(studentID){
     let url = api+'/student/delete/'+studentID;
+    
     console.log(url);
 return axios.delete(url)
 .then((response)=>{
@@ -95,19 +119,11 @@ console.log("from axios",store.getState());
 
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-      increment: ()=> dispatch({type: INCREMENT,val: 5}),
-      decrement: ()=> dispatch({type: DECREMENT,val: 5 }),
-      reset: ()=> dispatch({ type: RESET }),
-      updateTeamList: (val)=> dispatch({ type: UpdateTeamList, val:val }),
-      
-    }
-  }
+
 export default new DataStore()
 
 
-//  
+
 
 
 

@@ -1,6 +1,5 @@
 
 const initialState = {
-  teamList:[]
   };
   
   export const INCREMENT = "INCREMENT";
@@ -9,22 +8,22 @@ const initialState = {
   export const UpdateTeamList = "UpdateTeamList"
   export const GetTeamInfo = "GetTeamInfo"
   export const SelectStudent = "SelectStudent"
-  
+  export const SelectMsgTeam = "SelectedMsgTeam"
+  export const SelectMessage = "SelectMessage"
+  export const ResetInboxStore = "ResetInboxStore"
 
 
   
   
-  export default function count(state = initialState, action) {
+  export default function dispatch(state = initialState, action) {
     switch (action.type) {
       case GetTeamInfo:
-        
         return {
             ...state,
         selectedTeam: action.val
         };
   
       case SelectStudent:
-      console.log("FROM REDUCER",action.val)
         return {
             ...state,
         selectedStudent: action.val
@@ -35,7 +34,22 @@ const initialState = {
             ...state,
           teamList: action.val
         };
-        
+        case SelectMsgTeam:
+        return {
+            ...state,
+            selectedMsgTeam: action.val
+        };
+        case SelectMessage:
+        return {
+            ...state,
+        selectedMessage: action.val
+        };
+
+        case ResetInboxStore:
+        return {
+            ...state,
+        selectedMessage: null
+        };
 
       default:
         return state;

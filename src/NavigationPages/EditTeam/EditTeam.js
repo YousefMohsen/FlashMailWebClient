@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './EditTeam.css'
 import DataStore from '../../Data/DataStore'
 import {connect} from "react-redux"
-import { SelectStudent ,UpdateTeamList } from "../../Data/redux/reducer"
+import ActionFactory from '../../Data/redux/actions'
 
 const photoPlaveholder = "https://image.flaticon.com/icons/svg/149/149071.svg";
 
@@ -145,7 +145,7 @@ console.log("In RENDER TEAN",teamList);
 
          deleteStudent(student){
          DataStore.deleteStudentByID(student._id);
-         
+
          }
          selectStudent(student){
         
@@ -155,16 +155,14 @@ console.log("In RENDER TEAN",teamList);
          //  this.state ={data: 'sds'};
         }
   render() {
-    const test = this.props.count? "true" : "True";
-
     const teamSelector = this.renderTeamList();
     const teamInfo = this.renderTeaminfo();
     
     return (
       <div>
-      <div className="App-header1">
+      <div className="header">
       
-      <h1>Rediger hold {test}</h1>
+      <h1 className>Rediger hold </h1>
   
   </div>
 
@@ -195,8 +193,8 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => {
   return {
 
-    updateTeamList: (val)=> dispatch({ type: UpdateTeamList, val:val }),
-    selectStudent: (val)=> dispatch({ type: SelectStudent, val:val }),
+    updateTeamList: (val)=> dispatch(ActionFactory.updateTeamList(val)),
+    selectStudent: (val)=> dispatch(ActionFactory.selectStudent(val)),
     
   }
 }

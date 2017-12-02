@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
-import './MsgForm.css'
-import axios from 'axios';
+import './NewMessage.css'
 import DataStore from '../../Data/DataStore';
 import {connect} from "react-redux"
-import { INCREMENT, DECREMENT, RESET,UpdateTeamList } from "../../Data/redux/reducer"
+import {UpdateTeamList } from "../../Data/redux/reducer"
 
 
-class MsgForm extends Component {
+class NewMessage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {formData:{}};
-console.log(this.props)
 
+        this.state = {formData:{}};
+        //console.log(this.props)
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSenderChange = this.handleSenderChange.bind(this);
         this.handleMsgChange = this.handleMsgChange.bind(this);
         this.handleTeamChange = this.handleTeamChange.bind(this);
-        
-        
-
-
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderTeamList = this.renderTeamList.bind(this);
         
@@ -38,40 +32,47 @@ DataStore.fetchTeamList();
       handleTitleChange(event){
       var newData =  this.state.formData;
       newData.title =  event.target.value;
-      this.setState({formDate: newData});
+      this.setState({formData: newData});
         
 
       }
       handleSenderChange(event){
         var newData =  this.state.formData;
         newData.sender =  event.target.value;
-        this.setState({formDate: newData});
+        this.setState({formData: newData});
           
   
         }
         handleMsgChange(event){
           var newData =  this.state.formData;
           newData.msg =  event.target.value;
-          this.setState({formDate: newData});
+          this.setState({formData: newData});
 
           }
           handleTeamChange(event){
-
             var newData =  this.state.formData;
             newData.team =  event.target.value;
-            this.setState({formDate: newData});
+            this.setState({formData: newData});
+            console.log("HANDLE TEAM CHANGE",newData)
+            
 
           }
     handleSubmit(event) {
-
-      
-      event.preventDefault();
-      const formData = this.state.formData;
+ 
+      let formData = this.state.formData;
+if(formData.team&&formData.msg&&formData.title){
       
 DataStore.sendNewMessage(formData)
+.then(()=>{
+  
+})
+this.setState({formData:{}})
 
-      // get our form data out of state
 
+    }
+    else{
+      alert("Udfyld venligst alle felter")
+    }
 
       }
 
@@ -85,7 +86,7 @@ console.log("In RENDER TEAN",teamList);
              return <option value={team}>{team}</option> });
                     
         }else{
-          <option value="">nope</option>
+          <option value=""></option>
 
         }
 
@@ -93,7 +94,7 @@ console.log("In RENDER TEAN",teamList);
 
 
 
-        return <select  onChange={this.handleTeamChange}> {optionsToRender} </select>;
+        return <select  onChange={this.handleTeamChange}><option >Choose a team</option> {optionsToRender} </select>;
         
             }
 
@@ -109,9 +110,13 @@ console.log("In RENDER TEAN",teamList);
       <h1>Ny besked {this.props.count}</h1>
   </div>
 
+
+
+
+  
         <form onSubmit={this.handleSubmit} className="formStyle">
         {resultList}
-          <input type="text" placeholder="Titel.." onChange={this.handleTitleChange}/>
+          <input type="text" placeholder="Titel.." value={this.state.formData.title} onChange={this.handleTitleChange}/>
       
         <br/>
         
@@ -119,7 +124,7 @@ console.log("In RENDER TEAN",teamList);
        
    
       <br/>
-      <textarea type="text" placeholder="Skriv en besked" onChange={this.handleMsgChange}/>
+      <textarea type="text" placeholder="Skriv en besked" value={this.state.formData.msg} onChange={this.handleMsgChange}/>
       
     
       <br/>
@@ -144,4 +149,4 @@ const mapDispatchToProps = dispatch => {
     
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(MsgForm)
+export default connect(mapStateToProps,mapDispatchToProps)(NewMessage)

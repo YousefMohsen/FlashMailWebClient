@@ -1,4 +1,4 @@
-import { GetTeamInfo,UpdateTeamList, SelectStudent } from "./reducer"
+import { GetTeamInfo,UpdateTeamList, SelectMessage,SelectStudent,SelectMsgTeam,ResetInboxStore } from "./reducer"
 
 
 class ActionFactory {
@@ -24,7 +24,26 @@ class ActionFactory {
       val: student
     }
   }
+  selectMsgTeam(student) {
+    return {
+      type: SelectMsgTeam,
+      val: student
+    }
+  }
+  selectMessage(msg) {
+    console.log("ACTION select",msg)
+    return {
+      type: SelectMessage,
+      val: msg
+    }
+  }
 
+  resetInboxState(){
+
+    return {
+      type: ResetInboxStore,
+    }
+  }
   
 
 

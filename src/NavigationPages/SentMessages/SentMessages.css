@@ -1,0 +1,30 @@
+
+.msgBoxContainer{
+    width:100%;
+    text-align: left;
+    background-color:white;
+}
+
+
+
+.messageCard{
+background-color: white;
+
+
+
+
+
+}
+
+.messageCard h1{
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+    
+}
+
+.msgtitle{
+    text-align: center;
+    
+color: white
+}
+
