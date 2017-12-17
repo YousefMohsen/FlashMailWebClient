@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "./redux/store";
 import ActionFactory from "./redux/actions";
 
-const api = "http://yousefmohsen.dk:4000";
+const api = "http://localhost:4000" //"http://yousefmohsen.dk:4000";
 /**
  * All calls to the server is made through DataStore
  */

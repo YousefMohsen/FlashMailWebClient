@@ -18,7 +18,7 @@ const App = observer(class App extends Component {
             <ul className="nav navbar-nav">
               <li><Link to="/">Send Message </Link></li>
               <li><Link to="/newTeam">Create teams </Link></li>
-              <li><Link to="/editTeam">Edit teans </Link></li>
+              <li><Link to="/editTeam">Edit teams </Link></li>
               <li><Link to="/sent">Sent messages </Link></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

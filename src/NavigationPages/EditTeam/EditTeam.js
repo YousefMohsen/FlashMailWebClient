@@ -88,7 +88,7 @@ class EditTeam extends Component {
 
     }
     else {
-      return (<h1>Vælg et hold</h1>)
+      return (<h1>Choose a team</h1>)
     }
   }
 
@@ -96,7 +96,7 @@ class EditTeam extends Component {
 
   renderStudenList(studentList) {
 
-    if (!studentList) return <h1>ingen studerende fundet</h1>
+    if (!studentList) return <h1>No students found</h1>
 
     else {
 
