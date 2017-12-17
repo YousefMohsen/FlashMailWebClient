@@ -155,5 +155,5 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapDispatchToProps)(NewTeam)
 
 
-const exampleText  = '“Søren Kirkegaard" < søren@cphbusiness.dk >, \n “Jørgen Læssøe" < jørgen@cphbusiness.dk >,\n “Jostein Gaarder" < “jostein@cphbusiness.dk >,\n “Fernando Savater" < fernando@cphbusiness.dk >,'
+const exampleText  = '“Søren Kirkegaard" < søren@cphbusiness.dk >, \n “Jørgen Læssøe" < jørgen@cphbusiness.dk >,\n “Jostein Gaarder" < jostein@cphbusiness.dk >,\n “Fernando Savater" < fernando@cphbusiness.dk >,'
 const textFormat = ' “Elevens fulde navn" < elevens email >,';

@@ -65,7 +65,6 @@ if(formData.team&&formData.msg&&formData.title){
 DataStore.sendNewMessage(formData)
 .then(()=>{
   this.setState({formData:{team: formData.team, msg: "", title: "" }})
-  
 console.log(this.state.formData)
   this.render();
 })
