@@ -5,6 +5,10 @@ import { connect } from "react-redux"
 import ActionFactory from '../../Data/redux/actions'
 
 const photoPlaveholder = "https://s3.eu-central-1.amazonaws.com/elillatestbucket/user+(1).png";
+/**
+ * Edit team page. 
+ * One of four main pages
+ */
 
 class EditTeam extends Component {
 
@@ -32,7 +36,9 @@ class EditTeam extends Component {
 
   }
 
-
+ /**
+   * returns a droplist with team names
+   */
   renderTeamList() {
     let optionsToRender = null;
     let teamList = this.props.teamList;
@@ -121,13 +127,13 @@ class EditTeam extends Component {
 
         <div class="studentInfoContainer">
           <div className="studentInfo">
-            <h4 class="title">Navn: {student.name}</h4>
-            <h4>Mail: {student.mail}</h4>
-            <h4>Har mobilapp: {student.pushToken ? "Ja" : "Nej"}</h4>
+            <h4 class="title">Name: {student.name}</h4>
+            <h4>Email: {student.mail}</h4>
+            <h4>Have pohne app: {student.pushToken ? "Yes" : "No"}</h4>
           </div>
           <img src={student.imgUrl ? student.imgUrl : photoPlaveholder} class="studenPhoto" alt="StudentPhoto" />
 
-          <button onClick={this.deleteStudent.bind(this, student)} className="btn btn-danger">Slet</button> {/* TODO: */}
+          <button onClick={this.deleteStudent.bind(this, student)} className="btn btn-danger">Delete student</button> {/* TODO: */}
         </div>
       )
     }
@@ -158,7 +164,7 @@ class EditTeam extends Component {
       <div>
         <div className="header">
 
-          <h1 >Rediger hold </h1>
+          <h1 >Edit teams </h1>
 
         </div>
 

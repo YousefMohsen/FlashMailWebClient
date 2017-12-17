@@ -15,25 +15,14 @@ import { Provider } from 'react-redux';
 ReactDOM.render((
 
     <Provider store={store} actionsFactory={ActionFactory}>
-
         <Router history={hashHistory}>
-
-
             <Route path='/' component={App}>
                 <IndexRoute component={NewMessage} />
-
                 <Route path='/newTeam' component={NewTeam} />
                 <Route path='/editTeam' component={EditTeam} />
                 <Route path='/sent' component={SentMessages} />
-
             </Route>
         </Router>
-
-
     </Provider>
-
-
-
-
 ), document.getElementById('root'));
 registerServiceWorker();

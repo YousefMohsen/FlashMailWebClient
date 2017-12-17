@@ -1,43 +1,34 @@
-.studentInfoContainer{
-    width:100%;
-    background-color:white;
+.studentInfoContainer {
+    width: 100%;
+    background-color: white;
 }
-.studenPhoto{
-
-width: 30%;
-display: inline-block;
-margin: 0;    
-float: left;
-align-self: center;
-margin-right: 5px;
-padding-right: 5px;
-border-right: 1px solid grey;
-}
-.studentInfo{
+.studenPhoto {
+    width: 30%;
     display: inline-block;
-    margin: 0;    
-    
+    margin: 0;
+    float: left;
+    align-self: center;
+    margin-right: 5px;
+    padding-right: 5px;
+    border-right: 1px solid grey;
 }
-
+.studentInfo {
+    display: inline-block;
+    margin: 0;
+}
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 40%;
     display: inline-block;
-margin: 0;    
+    margin: 0;
 }
-
 .studentInfoContainer:hover {
     box-shadow: 3 8px 16px 0 rgba(0, 0, 0, 0.459);
 }
-
-
-
-.btn{
-
+.btn {
     width: 100%
 }
-
-.list-group{
+.list-group {
     float: left
 }

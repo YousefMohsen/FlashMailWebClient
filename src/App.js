@@ -15,21 +15,14 @@ const App = observer(class App extends Component {
         <nav className="navbar navbar-inverse" >
           <Header />
           <div className="container-fluid">
-
-
             <ul className="nav navbar-nav">
-
-              <li><Link to="/">Ny besked </Link></li>
-              <li><Link to="/newTeam">Opret hold </Link></li>
-              <li><Link to="/editTeam">Rediger hold </Link></li>
-              <li><Link to="/sent">Sendte beskeder </Link></li>
-              
-
+              <li><Link to="/">Send Message </Link></li>
+              <li><Link to="/newTeam">Create teams </Link></li>
+              <li><Link to="/editTeam">Edit teans </Link></li>
+              <li><Link to="/sent">Sent messages </Link></li>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
-
-              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log ud</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign out</a></li>
             </ul>
           </div>
         </nav>
